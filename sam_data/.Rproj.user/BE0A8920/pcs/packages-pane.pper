@@ -1,0 +1,7 @@
+{
+    "installOptions" : {
+        "installDependencies" : true,
+        "installFromRepository" : true,
+        "libraryPath" : "X:/OHSU Shared/Restricted/SOM/FM/FAMMED/Reporting Dashboard/Sam/FM/R_Analysis/my_R_Library/3_1_1"
+    }
+}

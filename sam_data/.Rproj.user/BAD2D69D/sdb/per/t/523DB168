@@ -1,0 +1,17 @@
+{
+    "contents" : "\nlibrary(mgcv)\nlibrary(ggplot2)\nlibrary(scales)\nlibrary(tidyr)\nlibrary(dplyr)\nlibrary(lubridate)\n\n\n#setwd(\"X:/OHSU Shared/Restricted/SOM/FM/FAMMED/Reporting Dashboard/Sam/FM/R_Analysis/Projects/Other/sam_data\")\nsetwd(\"F:/temp\")\nwkbk <- \"fitbit_export_20140926.csv\"\ndf <- read.csv(wkbk,skip=1,header=T)\n\ndf\nstr(df)\n\ndf\ndf1 <- df[c(-4,-5)]  #remove %fat and BP\ndf1[df1==0] <- NA    #replace zero values with \"NA\" for plotting (plots will ignor NA values)\ndf1$Date <- ymd(df$Date)\n\ndf1\nstr(df1)\n\n# m <- ggplot(data=df1,aes(x=Date,y=Weight)) + geom_line() + geom_point() + \n#      geom_smooth(method=\"lm\") +\n#      coord_cartesian(xlim=c(mdy(\"08-26-2014\"),mdy(\"9-26-2014\")),\n#                   ylim=c(200,208)) \n\nm <- ggplot(data=df1,aes(x=Date,y=Weight))  + geom_point() + \n#     geom_smooth(method=\"lm\",formula=y ~poly(x,2),size=1) +\n     geom_smooth(method=\"gam\",formula=y ~ s(x,k=3), size=1) +\n     coord_cartesian(xlim=c(mdy(\"08-25-2014\"),mdy(\"9-27-2014\")),\n                  ylim=c(197.5,208)) \n\n\nm\n\nm2 <- m + ggtitle(\"Sam - EOD Diet\") +\n#   ylab(\"Phone Calls / Month\") +\n  theme(\n    axis.title         = element_text(face=\"italic\", colour=\"darkred\", size=12),\n    axis.text.y        = element_text(colour = \"black\", size=8),\n    axis.title.x       = element_blank(),\n    legend.title       = element_blank(),\n    \n    plot.title  = element_text(colour=\"darkred\", size=14))\n\nm2\n\n",
+    "created" : 1409849082746.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1502706806",
+    "id" : "523DB168",
+    "lastKnownWriteTime" : 1411755158,
+    "path" : "X:/OHSU Shared/Restricted/SOM/FM/FAMMED/Reporting Dashboard/Sam/FM/R_Analysis/Projects/Other/sam_data/measurables_display.R",
+    "project_path" : "measurables_display.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}
